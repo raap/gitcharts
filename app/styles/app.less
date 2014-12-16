@@ -27,7 +27,7 @@ hr {
 }
 
 .project-dropdown {
-    margin-top: 11px;
+    margin-top: 14px;
 }
 
 .project-menu {
@@ -44,13 +44,13 @@ hr {
 .project-picker {
     font-family: HelveticaNeue, Roboto;
     font-size: 28px;
-    color: #F5A623;
+    color: #FFFFFF;
     line-height: 27px;
     letter-spacing: 1px;
 
-    margin-top: 1px;
     &:hover {
         color: #FFFFFF;
+        color: #ECECEC;
         text-decoration: none;
     }
     &:focus {
@@ -61,7 +61,7 @@ hr {
 
 .navbar-brand {
     padding: 0;
-    margin-top: 4px;
+    margin-top: 0px;
 }
 
 .dash-card-common {
@@ -73,28 +73,31 @@ hr {
 }
 
 .navbar {
-    background-color: #525469;
+    background-color: #4A4A4A;
     height: @navbar-height;
 }
 
 .btn-about {
+
     float: right;
-    width: 150px;
-    margin-top: 7px;
+    width: 140px;
+    margin-top: 9px;
+    margin-right: 40px;
 
     font-family: HelveticaNeue, Roboto;
     font-size: 16px;
-    color: #F5A623;
+    color: #4A4A4A;
     line-height: 18px;
     letter-spacing: 1px;
 
-    background: rgba(0,0,0,0);
-    border-radius: 0px;
-    border: 3px solid #F5A623;
+    border-radius: 8px;
+    background: #FFFFFF;
+    -moz-box-shadow:    0px 0px 8px 0px #9B9B9B;
+    -webkit-box-shadow: 0px 0px 8px 0px #9B9B9B;
+    box-shadow:         0px 0px 8px 0px #9B9B9B;
 
     &:hover {
-        color: #FFF;
-        border: 3px solid #FFF;
+        background: #ECECEC;
     }
 }
 
@@ -146,8 +149,6 @@ hr {
         background: #979797;
         border: 0;
 
-        .ui-slider-horizontal {
-        }
         .ui-slider-handle {
             width: 11px;
             height: 20px;
