@@ -17,7 +17,7 @@ export default Ember.Route.extend({
             projectName: project,
             days: days,
             summary: Ember.$.getJSON('/api/p/'+project+'/r/summary'),
-            topAchievers: Ember.$.getJSON('/api/p/'+project+'/r/winners'),
+            topAchievers: Ember.$.getJSON('/api/p/'+project+'/r/winners?days='+days),
             reports: Ember.$.getJSON('/api/p/'+project+'/r/last_x_days?days='+days),
             filesChanged: Ember.$.getJSON('/api/p/'+project+'/r/files_changed?days='+days),
         });
