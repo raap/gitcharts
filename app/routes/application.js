@@ -9,7 +9,7 @@ export default Ember.Route.extend({
         var result = Ember.Object.create({ isLoading: true });
 
         Ember.$.getJSON('/api/p').then(function(res) {
-            result.set('projects', res.projects);
+            result.set('projects', res.projects.sort());
             result.set('isLoading', false);
         }.bind(this));
 
