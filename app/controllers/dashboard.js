@@ -6,11 +6,12 @@ export default Ember.Controller.extend({
     days: null,
     isFixedDaysFilter: false,
     isBiggerMargin: Ember.computed.alias('isFixedDaysFilter'),
-
-    repoSummary: undefined,
+    loadingCounter: undefined,
+    isLoading: true,
 
     init: function() {
         this._super();
+        this.set('loadingCounter', 0);
     },
 
     projectNameChanged: function() {
@@ -20,8 +21,19 @@ export default Ember.Controller.extend({
     actions: {
         daysChanged: function() {
             this.set('days', this.get('daysCounter'));
+            this.set('loadingCounter', 0);
         }
     },
+
+    /**
+     * We use a loading counter property to notify if all resources were loaded
+     * so wecan visually mark the data fresh (i.e. hide the laoding wheels)
+     */
+    loadingCounterChanged: function() {
+        // Magic 4 is because we make 4 separate requests and we increment
+        // the loadingCounter property each time a request is resolved
+        this.set('isLoading', this.get('loadingCounter') < 4);
+    }.observes('loadingCounter'),
 
     contentChanged: function() {
         // Prepare model for Summary
@@ -34,6 +46,7 @@ export default Ember.Controller.extend({
                 size: metrics.size,
                 files: metrics.files
             }));
+            this.incrementProperty('loadingCounter');
         }.bind(this));
 
         // Prepare model for Top Acievers
@@ -46,6 +59,7 @@ export default Ember.Controller.extend({
 
                 return Ember.merge(prev, newCategory);
             }, Ember.Object.create()));
+            this.incrementProperty('loadingCounter');
         }.bind(this));
 
         // Prepare model for charts
@@ -65,10 +79,12 @@ export default Ember.Controller.extend({
                     size: metrics.size[idx]
                 };
             }));
+            this.incrementProperty('loadingCounter');
         }.bind(this));
 
         this.get('content.filesChanged').then(function(res) {
             this.set('filesChanged', res.report.metrics.sum);
+            this.incrementProperty('loadingCounter');
         }.bind(this));
     }.observes('content'),
 
